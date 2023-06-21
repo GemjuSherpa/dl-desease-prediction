@@ -7,6 +7,7 @@ from cnnDeseaseClassifier.pipeline.stage_02_prepare_base_model import (
 )
 
 from cnnDeseaseClassifier.pipeline.stage_03_training import ModelTrainingPipeline
+from cnnDeseaseClassifier.pipeline.stage_04_evaluation import EvaluationPipeline
 
 
 STAGE_NAME = "Data Ingestion"
@@ -40,6 +41,18 @@ try:
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
     model_trainer = ModelTrainingPipeline()
     model_trainer()
+    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+STAGE_NAME = "Evaluation"
+
+try:
+    logger.info(f"*******************")
+    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+    evaluation = EvaluationPipeline()
+    evaluation()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
